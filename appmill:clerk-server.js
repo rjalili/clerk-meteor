@@ -28,7 +28,9 @@ Meteor.methods({
     var clerkBucket = {};
     var httpResult;
     try  {
-      httpResult = HTTP.call("GET",Clerk.clerkAPI_URL+"?key="+key,{timeout:1000});
+      var url = Clerk.clerkAPI_URL+"?key="+key;
+      //console.log("url " + url );
+      httpResult = HTTP.call("GET",url,{timeout:1000});
     }
     catch (e) {
       throw new Meteor.Error("clerk-fetch","Failed to fetch from clerk");
@@ -42,7 +44,7 @@ Meteor.methods({
     });
     */
     clerkData = httpResult.data;
-    clerkData = clerkData.result; // reply is {"result": clerkData}
+    //clerkData = clerkData.result; // reply is {"result": clerkData}
     return clerkData;
   }
 });
